@@ -1,22 +1,34 @@
-// player one button, player 2 button, and reset button
-const p1Buton = document.querySelector('#p1Button');
-const p2Button = document.querySelector('#p2Button');
+const p1 = {
+    score: 0,
+    button: document.querySelector('#p1Button'),
+    display: document.querySelector('#p1Display')
+}
+const p2 = {
+    score: 0,
+    button: document.querySelector('#p2Button'),
+    display: document.querySelector('#p2Display')
+}
+
+
 const resetButton = document.querySelector('#reset');
-// selecting score displayed for both players
-const p1Display = document.querySelector('#p1Display');
-const p2Display = document.querySelector('#p2Display');
-// selecting the winning score
 const winningScoreSelect = document.querySelector('#playto');
 
-
-// variables to keep track of current score values for both players
-// and the score that determines who wins
-let p1Score = 0;
-let p2Score = 0;
 let winningScore = 3;
-// boolean to indicate whether a player has reached the winning score
 let isGameOver = false;
 
+// A function to update the score of a player and 
+function updateScores(player, opponent) {
+    if (!isGameOver) {
+        player.score += 1;
+        if (player.score === winningScore) {
+            isGameOver = true;
+            player.displayclassList.add('has-text-success');
+            opponent.classList.add('has-text-danger');
+            player.disabled = true;
+            opponent.disabled = true;
+        }
+    }
+}
 
 // When a player's button is clicked, if they have not reached the 
 // winning score yet, we increase their score by one
